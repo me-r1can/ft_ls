@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 21:53:36 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:35:52 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/22 18:15:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_entry	*new_entry(void)
 		return (NULL);
 	if (!(ret->path = ft_strnew(PATH_MAX)))
 		return (NULL);
+	ret->target = NULL;
 	ret->next = NULL;
 	return (ret);
 }

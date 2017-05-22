@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 15:06:34 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:24:21 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/22 18:15:32 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ void		line_print(t_entry *temp, t_max *max)
 {
 	while (temp)
 	{
+		ft_printf("name: %s\ttarget: %s\n", temp->name, temp->target);
+		if (S_ISLNK(temp->stats.st_mode))
+		{
+			if (!(temp->target = ft_strnew(PATH_MAX)))
+				ft_ls_error(1, 0, 0);
+			readlink(temp->path, temp->target, PATH_MAX);
+		}
+		else
+			temp->target = temp->path;
 		if ((!(is_hidden(temp->name)) || g_options & OPT_A) ||
 			(!(is_repere(temp->name)) && g_options & OPT_BA))
 		{
