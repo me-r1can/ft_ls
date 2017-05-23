@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 18:35:59 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:25:48 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/23 19:53:32 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		compare_time(t_entry *t1, t_entry *t2)
 
 	diff = 0;
 	if (g_sort & SORT_MOD)
-		diff = t1->stats.st_mtime - t2->stats.st_mtime;
+		diff = t1->stats->st_mtime - t2->stats->st_mtime;
 	else if (g_sort & SORT_ACC)
-		diff = t1->stats.st_atime - t2->stats.st_atime;
+		diff = t1->stats->st_atime - t2->stats->st_atime;
 	else if (g_sort & SORT_SC)
-		diff = t1->stats.st_ctime - t2->stats.st_ctime;
+		diff = t1->stats->st_ctime - t2->stats->st_ctime;
 	if (diff == 0)
 		return (compare_path(t1, t2));
 	else if (diff > 0)
@@ -43,7 +43,7 @@ int		compare_size(t_entry *t1, t_entry *t2)
 	off_t	diff;
 
 	diff = 0;
-	diff = t1->stats.st_size - t2->stats.st_size;
+	diff = t1->stats->st_size - t2->stats->st_size;
 	if (diff == 0)
 		return (compare_path(t1, t2));
 	else if (diff > 0)

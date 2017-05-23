@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 14:29:40 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:44:32 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/23 20:59:54 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_entry			*get_contents(char *parent, t_list **queue, char *current)
 		ft_ls_error(1, 0, 0);
 	new->name = ft_strdup(current);
 	get_full_path(new->path, parent, new->name);
-	if (lstat(new->path, &(new->stats)) != 0)
+	if (lstat(new->path, new->stats) != 0)
 		ft_ls_error(0, new->path, errno);
 	if ((g_options & OPT_BR || g_sort & SORT_MOD) && queue)
 	{
 		if (!(is_repere(new->name)) && (g_options & OPT_BR) &&
-			S_ISDIR(new->stats.st_mode) && ((new->name)[0] != '.' ||
+			S_ISDIR(new->stats->st_mode) && ((new->name)[0] != '.' ||
 				(g_options & OPT_A)))
 			add_to_queue(queue, new->path);
 	}

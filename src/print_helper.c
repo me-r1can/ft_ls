@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 23:26:40 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:28:05 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/23 19:55:56 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ static t_max	get_field_len(t_entry *temp)
 	t_max	current;
 
 	initialize_max(&current);
-	current.links = ft_numlen(temp->stats.st_nlink);
+	current.links = ft_numlen(temp->stats->st_nlink);
 	current.uid = ft_strlen(temp->usr->pw_name);
 	current.gid = ft_strlen(temp->grp->gr_name);
 	current.path = ft_strlen(temp->name);
-	if (is_device(&(temp->stats)))
+	if (is_device(temp->stats))
 	{
-		current.major = ft_numlen(MAJOR(temp->stats.st_rdev));
-		current.minor = ft_numlen(MINOR(temp->stats.st_rdev));
+		current.major = ft_numlen(MAJOR(temp->stats->st_rdev));
+		current.minor = ft_numlen(MINOR(temp->stats->st_rdev));
 	}
 	else
-		current.size = ft_numlen(temp->stats.st_size);
+		current.size = ft_numlen(temp->stats->st_size);
 	return (current);
 }
 
@@ -76,9 +76,9 @@ void			get_max(t_entry *start, t_max *max)
 		if ((!(is_hidden(temp->name)) || g_options & OPT_A) ||
 		(!(is_repere(temp->name)) && g_options & OPT_BA))
 		{
-			temp->usr = getpwuid(temp->stats.st_uid);
-			temp->grp = getgrgid(temp->stats.st_gid);
-			max->total += temp->stats.st_blocks;
+			temp->usr = getpwuid(temp->stats->st_uid);
+			temp->grp = getgrgid(temp->stats->st_gid);
+			max->total += temp->stats->st_blocks;
 			max->has_contents = 1;
 			current = get_field_len(temp);
 			compare_all(&current, max);

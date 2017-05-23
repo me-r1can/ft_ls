@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 16:25:44 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/22 16:59:09 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/23 19:50:42 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct			s_entry
 	char				*path;
 	char				*name;
 	char				*target;
-	t_stat				stats;
+	t_stat				*stats;
 	struct passwd		*usr;
 	struct group		*grp;
 	struct s_entry		*next;

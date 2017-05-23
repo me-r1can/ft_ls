@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 14:53:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/22 18:14:15 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/23 20:25:08 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,18 @@ static char		*get_time(t_entry *temp)
 	char	*timestamp;
 
 	if (g_sort & SORT_ACC)
-		timestamp = ctime(&(temp->stats.st_atime));
+		timestamp = ctime(&(temp->stats->st_atime));
 	else if (g_sort & SORT_SC)
-		timestamp = ctime(&(temp->stats.st_ctime));
+		timestamp = ctime(&(temp->stats->st_ctime));
 	else
-		timestamp = ctime(&(temp->stats.st_mtime));
+		timestamp = ctime(&(temp->stats->st_mtime));
 	return (timestamp);
 }
 
 static void		print_name(t_entry *temp)
 {
-	if (S_ISLNK(temp->stats.st_mode) && temp->target)
-	{
+	if (S_ISLNK(temp->stats->st_mode) && temp->target)
 		ft_printf("%s -> ", temp->target);
-		free(temp->target);
-	}
 	ft_printf("%s\n", temp->name);
 }
 
@@ -92,22 +89,22 @@ void			long_print(t_entry *temp, t_max *max)
 	char	attr;
 
 	timestamp = get_time(temp);
-	print_permissions(&(temp->stats));
+	print_permissions(temp->stats);
 	attr = has_attr(temp);
 	ft_printf("%c%*d %-*s  %-*s  ", attr, max->links + 1,
-		temp->stats.st_nlink, max->uid, temp->usr->pw_name, max->gid,
+		temp->stats->st_nlink, max->uid, temp->usr->pw_name, max->gid,
 		temp->grp->gr_name);
-	if (is_device(&(temp->stats)))
-		ft_printf("%*d, %*d ", max->major, MAJOR(temp->stats.st_rdev),
-			max->minor, MINOR(temp->stats.st_rdev));
+	if (is_device(temp->stats))
+		ft_printf("%*d, %*d ", max->major, MAJOR(temp->stats->st_rdev),
+			max->minor, MINOR(temp->stats->st_rdev));
 	else
-		ft_printf("%*lld ", max->size, temp->stats.st_size);
+		ft_printf("%*lld ", max->size, temp->stats->st_size);
 	if (timestamp)
-		(recent(&(temp->stats))) ? ft_printf("%.12s ", timestamp + 4) :
+		(recent(temp->stats)) ? ft_printf("%.12s ", timestamp + 4) :
 			ft_printf("%.7s %4s ", timestamp + 4, ft_strtrim(timestamp + 20));
 	print_name(temp);
 	if (g_options & OPT_AT && attr == '@')
 		print_attr(temp);
-	if (g_options & OPT_E && get_acl(temp) && S_ISDIR(temp->stats.st_mode))
+	if (g_options & OPT_E && get_acl(temp) && S_ISDIR(temp->stats->st_mode))
 		print_acl(temp);
 }
