@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 23:20:31 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 15:01:34 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 21:06:31 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	print_file_queue(t_list *file_queue, int next)
 	while (temp)
 	{
 		ft_insert(&start, get_contents((((char *)(temp->content))[0] == '/')
-			? "" : ".", NULL, (char *)temp->content));
+			? "" : ".", NULL, (char *)temp->content, 0));
 		free_queue = temp;
 		temp = temp->next;
 		free(free_queue->content);

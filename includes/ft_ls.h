@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 16:25:44 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/23 19:50:42 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 21:05:14 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct			s_entry
 {
 	char				*path;
 	char				*name;
-	char				*target;
 	t_stat				*stats;
 	struct passwd		*usr;
 	struct group		*grp;
@@ -81,7 +80,7 @@ typedef struct			s_max
 
 int						ft_ls(t_list **queue);
 t_entry					*get_contents(char *parent, t_list **queue,
-	char *current);
+	char *current, int *recursive);
 
 void					add_to_queue(t_list **queue, char *path);
 void					parse(int ac, char **av, t_list **queue);

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 14:53:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/23 20:25:08 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 17:49:59 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,18 @@ static char		*get_time(t_entry *temp)
 
 static void		print_name(t_entry *temp)
 {
-	if (S_ISLNK(temp->stats->st_mode) && temp->target)
-		ft_printf("%s -> ", temp->target);
-	ft_printf("%s\n", temp->name);
+	char	*link_target;
+
+	if (S_ISLNK(temp->stats->st_mode))
+	{
+		if (!(link_target = ft_strnew(PATH_MAX)))
+			ft_ls_error(1, 0, 0);
+		readlink(temp->path, link_target, PATH_MAX);
+		ft_printf("%s -> %s\n", temp->name, link_target);
+		free(link_target);
+	}
+	else
+		ft_printf("%s\n", temp->name);
 }
 
 void			long_print(t_entry *temp, t_max *max)

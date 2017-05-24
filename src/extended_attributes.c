@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 17:58:57 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/22 17:32:23 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 21:27:32 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ extern unsigned char g_sort;
 char		has_attr(t_entry *temp)
 {
 	char	ret;
+	acl_t	acl;
 
 	ret = ' ';
-	if (get_acl(temp))
+	if ((acl = get_acl(temp)))
+	{
 		ret = '+';
-	if (listxattr(temp->target, 0, 0, 0) > 0)
+		acl_free(acl);		
+	}
+	if (listxattr(temp->path, 0, 0, XATTR_NOFOLLOW) > 0)
 		ret = '@';
 	return (ret);
 }
@@ -35,16 +39,16 @@ void		print_attr(t_entry *temp)
 	ssize_t		val_len;
 	ssize_t		buff_len;
 
-	buff_len = listxattr(temp->target, NULL, 0, 0);
+	buff_len = listxattr(temp->path, NULL, 0, XATTR_NOFOLLOW);
 	if (!(key = ft_strnew(buff_len)))
 		ft_ls_error(1, 0, 0);
-	buff_len = listxattr(temp->target, key, buff_len, 0);
+	buff_len = listxattr(temp->path, key, buff_len, XATTR_NOFOLLOW);
 	while (buff_len > 0)
 	{
-		if ((val_len = getxattr(temp->target, key, NULL, 0, 0, 0)) == -1)
+		if ((val_len = getxattr(temp->path, key, NULL, 0, 0, XATTR_NOFOLLOW)) == -1)
 			return ;
 		val = ft_strnew(val_len);
-		val_len = getxattr(temp->target, key, val, val_len, 0, 0);
+		val_len = getxattr(temp->path, key, val, val_len, 0, XATTR_NOFOLLOW);
 		val[val_len] = '\0';
 		if (val_len > 0)
 			ft_printf("\t%s\t  %ld\n", key, val_len);
@@ -61,7 +65,7 @@ acl_t		get_acl(t_entry *temp)
 
 	if (!(acl = acl_init(1)))
 		return (NULL);
-	acl = acl_get_file(temp->target, ACL_TYPE_EXTENDED);
+	acl = acl_get_link_np(temp->path, ACL_TYPE_EXTENDED);
 	return (acl);
 }
 

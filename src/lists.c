@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 21:53:36 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/23 21:05:05 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 18:18:02 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ extern unsigned char g_sort;
 void	free_entry(t_entry **entry)
 {
 	free((*entry)->path);
-	free((*entry)->target);
 	// free((*entry)->usr);
 	// free((*entry)->grp);
 	if ((*entry)->name)
-		free((*entry)->name);	
+		free((*entry)->name);
 	free((*entry)->stats);
 	free(*entry);
 	(*entry) = NULL;
@@ -51,8 +50,6 @@ t_entry	*new_entry(void)
 	if (!(ret = (t_entry *)malloc(sizeof(t_entry))))
 		return (NULL);
 	if (!(ret->path = ft_strnew(PATH_MAX)))
-		return (NULL);
-	if (!(ret->target = ft_strnew(PATH_MAX)))
 		return (NULL);
 	if (!(ret->stats = (t_stat *)malloc(sizeof(t_stat))))
 		return (NULL);

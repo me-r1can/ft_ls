@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 15:06:34 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/23 20:21:29 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 20:45:29 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ void		line_print(t_entry *temp, t_max *max)
 {
 	while (temp)
 	{
-		if (!(S_ISDIR(temp->stats->st_mode)) || readlink(temp->path, temp->target, PATH_MAX) == -1)
-		{
-			free(temp->target);
-			temp->target = ft_strdup(temp->path);
-		}
 		if ((!(is_hidden(temp->name)) || g_options & OPT_A) ||
 			(!(is_repere(temp->name)) && g_options & OPT_BA))
 		{
