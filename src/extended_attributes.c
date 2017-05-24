@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 17:58:57 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 21:27:32 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 21:51:33 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		has_attr(t_entry *temp)
 	if ((acl = get_acl(temp)))
 	{
 		ret = '+';
-		acl_free(acl);		
+		acl_free(acl);
 	}
 	if (listxattr(temp->path, 0, 0, XATTR_NOFOLLOW) > 0)
 		ret = '@';
@@ -45,7 +45,8 @@ void		print_attr(t_entry *temp)
 	buff_len = listxattr(temp->path, key, buff_len, XATTR_NOFOLLOW);
 	while (buff_len > 0)
 	{
-		if ((val_len = getxattr(temp->path, key, NULL, 0, 0, XATTR_NOFOLLOW)) == -1)
+		if ((val_len =
+			getxattr(temp->path, key, NULL, 0, 0, XATTR_NOFOLLOW)) == -1)
 			return ;
 		val = ft_strnew(val_len);
 		val_len = getxattr(temp->path, key, val, val_len, 0, XATTR_NOFOLLOW);

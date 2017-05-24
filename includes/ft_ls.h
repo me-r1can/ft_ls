@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 16:25:44 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 21:05:14 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 22:22:30 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,8 @@ int						compare_path(t_entry *t1, t_entry *t2);
 int						compare_time(t_entry *t1, t_entry *t2);
 int						compare_size(t_entry *t1, t_entry *t2);
 int						none(t_entry *t1, t_entry *t2);
+
+int						timecmp(const char *t1, const char *t2);
+int						sizecmp(const char *t1, const char *t2);
 
 #endif

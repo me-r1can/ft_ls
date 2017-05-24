@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/05/20 16:23:21 by nlowe            ###   ########.fr        #
+#    Updated: 2017/05/24 22:22:58 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_NAME = main.c \
 			long_print.c \
 			print_helper.c \
 			sort.c \
+			sort_helper.c \
 			unix.c \
 			utility.c \
 

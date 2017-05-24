@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 23:20:31 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 21:06:31 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/24 22:21:34 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,13 @@ void		add_to_queue(t_list **queue, char *path)
 	ft_strncpy(active, path, PATH_MAX);
 	if (!(new = ft_lstnew(active, PATH_MAX + 1)))
 		ft_ls_error(1, 0, 0);
-	if (g_sort & SORT_REV)
+	if (g_sort & SORT_MOD || g_sort & SORT_ACC || g_sort & SORT_SC)
+		ft_lstaddbystr(queue, new, timecmp);
+	else if (g_sort & SORT_SIZE)
+		ft_lstaddbystr(queue, new, sizecmp);
+	else if (g_sort & SORT_NONE)
+		ft_lstaddback(queue, new);
+	else if (g_sort & SORT_REV)
 		ft_lstaddbystr(queue, new, ft_strrcmp);
 	else
 		ft_lstaddbystr(queue, new, ft_strcmp);
