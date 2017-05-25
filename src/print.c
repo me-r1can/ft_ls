@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 15:06:34 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/25 16:08:14 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 18:03:44 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		column_print(t_entry *temp, t_max *max)
 			ft_printf("%-*s", ((max->path) + 8), temp->name);
 			pos++;
 		}
-		if (pos == columns)
+		if (pos == columns && temp->next)
 		{
 			pos = 0;
 			ft_printf("\n");
