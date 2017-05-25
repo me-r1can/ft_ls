@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 21:53:36 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 21:50:57 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 16:56:23 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ t_entry	*new_entry(void)
 }
 
 void	entry_addby(t_entry **alst, t_entry *new,
-	int (*cmp)(t_entry *, t_entry *), int rev)
+	int (*cmp)(t_entry *, t_entry *))
 {
 	t_entry		*current;
 	t_entry		*previous;
 
 	current = *alst;
 	previous = NULL;
-	while ((current != NULL) && (cmp(new, current) * rev) >= 0)
+	while ((current != NULL) && (cmp(new, current) >= 0))
 	{
 		previous = current;
 		current = current->next;
@@ -83,13 +83,9 @@ void	entry_addby(t_entry **alst, t_entry *new,
 void	ft_insert(t_entry **start, t_entry *new)
 {
 	int		(*cmp)(t_entry *, t_entry *);
-	int		rev;
 
 	if (!start || !new)
 		return ;
-	rev = 1;
-	if (g_sort & SORT_REV)
-		rev = -1;
 	if (g_sort & SORT_MOD || g_sort & SORT_ACC || g_sort & SORT_SC)
 		cmp = compare_time;
 	else if (g_sort & SORT_SIZE)
@@ -98,5 +94,5 @@ void	ft_insert(t_entry **start, t_entry *new)
 		cmp = none;
 	else
 		cmp = compare_path;
-	entry_addby(start, new, cmp, rev);
+	entry_addby(start, new, cmp);
 }

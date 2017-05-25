@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 23:20:31 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 22:21:34 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 16:47:13 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	print_file_queue(t_list *file_queue, int next)
 		free(free_queue->content);
 		free(free_queue);
 	}
-	ft_ls_print(&start, 0, 0);
+	ft_ls_print(&start, 0);
 	free_list(&start);
 	if ((g_options & OPT_BR || g_options & OPT_MULT) && next)
 		ft_printf("\n");

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 16:25:44 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 22:22:30 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 16:57:49 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct			s_max
 	int					minor;
 }						t_max;
 
-int						ft_ls(t_list **queue);
+int						ft_ls(t_list **queue, int print_parent);
 t_entry					*get_contents(char *parent, t_list **queue,
 	char *current, int *recursive);
 
@@ -93,7 +93,7 @@ char					*get_full_path(char *active, char *parent, char *file);
 int						ft_strrcmp(const char *s1, const char *s2);
 int						ft_numlen(long long nbr);
 
-void					ft_ls_print(t_entry **start, int next, int folder);
+void					ft_ls_print(t_entry **start, int folder);
 void					long_print(t_entry *temp, t_max *max);
 void					get_max(t_entry *start, t_max *max);
 
@@ -107,10 +107,6 @@ int						recent(t_stat *stats);
 
 t_entry					*new_entry(void);
 void					ft_insert(t_entry **start, t_entry *new);
-void					entry_addby(t_entry **alst, t_entry *new, \
-	int(*cmp)(t_entry *, t_entry *), int rev);
-void					entry_addafter(t_entry *lst, t_entry *new);
-t_entry					*new_entry(void);
 void					free_list(t_entry **start);
 
 int						compare_path(t_entry *t1, t_entry *t2);

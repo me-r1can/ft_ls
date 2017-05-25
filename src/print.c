@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 15:06:34 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 20:45:29 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 16:08:14 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		line_print(t_entry *temp, t_max *max)
 	}
 }
 
-void		ft_ls_print(t_entry **start, int next, int folder)
+void		ft_ls_print(t_entry **start, int folder)
 {
 	t_entry		*temp;
 	t_max		max;
@@ -70,6 +70,4 @@ void		ft_ls_print(t_entry **start, int next, int folder)
 		column_print(temp, &max);
 	else
 		line_print(temp, &max);
-	if ((g_options & OPT_BR || g_options & OPT_MULT) && next)
-		ft_printf("\n");
 }

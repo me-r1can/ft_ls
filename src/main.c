@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 17:02:43 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/24 20:55:49 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 15:50:13 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int		main(int ac, char **av)
 
 	queue = NULL;
 	parse(ac, av, &queue);
-	ft_ls(&queue);
+	ft_ls(&queue, 0);
 	return (0);
 }

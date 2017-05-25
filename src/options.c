@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 14:34:22 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/20 14:47:22 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/25 17:09:07 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int		normal_options(char c)
 		g_options |= OPT_E;
 	else if (c == 'A')
 		g_options |= OPT_BA;
+	else if (c == 'r')
+		g_sort |= SORT_REV;
 	else
 		return (0);
 	return (1);
@@ -41,9 +43,7 @@ static int		sort_options(char c)
 	unsigned char	sort;
 
 	sort = g_sort & SORT_REV ? SORT_REV : 0;
-	if (c == 'r')
-		sort |= SORT_REV;
-	else if (c == 't')
+	if (c == 't')
 		sort |= SORT_MOD;
 	else if (c == 'u')
 		sort |= SORT_ACC;
