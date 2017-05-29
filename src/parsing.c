@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 23:20:31 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/29 17:45:24 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/29 17:55:48 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		parse(int ac, char **av, t_list **queue)
 	file_queue = NULL;
 	error_queue = NULL;
 	get_options(ac, av, &i);
-	if (!((active = ft_strnew(PATH_MAX))))
+	if (!((active = ft_strnew(PATH_MAX + 1))))
 		ft_ls_error(1, 0, 0);
 	if (i == ac)
 		add_to_queue(queue, ".");

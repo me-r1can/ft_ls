@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 21:53:36 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/25 16:56:23 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/29 17:50:09 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_entry	*new_entry(void)
 
 	if (!(ret = (t_entry *)malloc(sizeof(t_entry))))
 		return (NULL);
-	if (!(ret->path = ft_strnew(PATH_MAX)))
+	if (!(ret->path = ft_strnew(PATH_MAX + 1)))
 		return (NULL);
 	if (!(ret->stats = (t_stat *)malloc(sizeof(t_stat))))
 		return (NULL);
