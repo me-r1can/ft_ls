@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 23:20:31 by nlowe             #+#    #+#             */
-/*   Updated: 2017/05/25 16:47:13 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/05/29 17:45:24 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static int	dir_exists(char *active, t_list **file_queue, t_list **error_queue)
 
 	errno = 0;
 	dir = NULL;
-	if (readlink(active, NULL, 0) != -1 && g_options & OPT_L)
+	if (ft_strlen(active) >= NAME_MAX)
+		errno = ENAMETOOLONG;
+	else if (readlink(active, NULL, 0) != -1 && g_options & OPT_L)
 		errno = 20;
 	else if ((dir = opendir(active)) ||
 		(errno != 2 && errno != 20 && errno != 13))
@@ -88,7 +90,7 @@ void		add_to_queue(t_list **queue, char *path)
 	char		*active;
 	t_list		*new;
 
-	if (!((active = ft_strnew(PATH_MAX))))
+	if (!((active = ft_strnew(PATH_MAX + 1))))
 		ft_ls_error(1, 0, 0);
 	ft_strncpy(active, path, PATH_MAX);
 	if (!(new = ft_lstnew(active, PATH_MAX + 1)))
